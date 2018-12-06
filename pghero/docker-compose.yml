@@ -1,0 +1,10 @@
+version: '2.0'
+
+services:
+  pghero:
+    build: 
+      context: .
+    env_file: .env
+    ports:
+      - "8080:8080"
+

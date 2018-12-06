@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nexus:
+    image: sonatype/nexus3:latest
+    ports:
+        - "8081:8081"
+        - "8123:8123"
+#        - "8124:8124"
+    volumes:
+        - ../data:/nexus-data
+  nginx:
+    restart: always
+    image: nginx:1.13
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8124:8124"
+    volumes:
+      - ../fullchain.pem:/etc/nginx/fullchain.pem
+      - ../privkey.pem:/etc/nginx/privkey.pem
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
